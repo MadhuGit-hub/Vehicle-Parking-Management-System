@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .nav {
+            background-color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .nav li {
+            margin: 0 15px;
+        }
+        
+        .nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .code-block {
+            background-color: #f4f4f4;
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .screenshot {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .screenshot img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        
+        .alert-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 4px solid var(--warning);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .download-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .download-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .download-card i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .download-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .download-card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        .step-container {
+            counter-reset: step-counter;
+            margin: 2rem 0;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+        
+        .step:before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            background-color: var(--secondary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .os-tabs {
+            display: flex;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .os-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .os-tab.active {
+            border-bottom: 3px solid var(--secondary);
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .output-example {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .output-header {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .output-content {
+            padding: 10px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav li {
+                margin: 5px 0;
+            }
+            
+            .feature-grid, .download-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                flex-direction: column;
+            }
+            
+            .step:before {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Library Management System</h1>
+            <p>A comprehensive Java Swing application for managing library operations</p>
+        </div>
+    </header>
+    
+    <nav class="nav">
+        <div class="container">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#downloads">Downloads</a></li>
+                <li><a href="#setup">Setup</a></li>
+                <li><a href="#database">Database</a></li>
+                <li><a href="#usage">Usage</a></li>
+                <li><a href="#output">Expected Output</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>The Library Management System is a Java Swing application designed to streamline library operations. It provides an intuitive graphical interface for managing books, users, transactions, and generating reports.</p>
+            
+            <p>This application uses MySQL for data storage and incorporates the RS2XML (DbUtils) library for seamless database operations. The system follows a modular design with different sections for each library management function.</p>
+            
+            <div class="alert alert-info">
+                <strong>Technical Stack:</strong> Java, Swing, MySQL, JDBC, RS2XML (DbUtils)
+            </div>
+        </section>
+        
+        <section id="features">
+            <h2>Key Features</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Book Management</h4>
+                    <p>Add, update, delete, and search books in the library collection. Maintains book ID and name information.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>User Management</h4>
+                    <p>Manage library users with capabilities to add, update, and delete user records. Prevents deletion of users with active loans.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>Transaction Handling</h4>
+                    <p>Issue and return books with automatic fine calculation for overdue items (7-day loan period with $1/day fine after due date).</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>Reporting System</h4>
+                    <p>Generate various reports including borrowing history, user-specific history, and book availability status. Export functionality to CSV.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>User-Friendly Interface</h4>
+                    <p>Intuitive card-based navigation with a consistent layout. Real-time status updates with system date and time.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4>Database Integration</h4>
+                    <p>Robust MySQL integration with proper error handling and SQL injection prevention through prepared statements.</p>
+                </div>
+            </div>
+            
+            <div class="screenshot">
+                <img src="images/main-dashboard.png" alt="Main Dashboard Interface">
+                <p class="caption">Figure 1: Main Dashboard Interface</p>
+            </div>
+            
+            <div class="screenshot">
+                <img src="images/book-management.png" alt="Book Management Section">
+                <p class="caption">Figure 2: Book Management Section</p>
+            </div>
+            
+            <div class="screenshot">
+                <img src="images/user-management.png" alt="User Management Interface">
+                <p class="caption">Figure 3: User Management Interface</p>
+            </div>
+        </section>
+        
+        <section id="downloads">
+            <h2>Downloads & Installation</h2>
+            
+            <p>To run the Library Management System, you'll need to install the following prerequisites. Click the links below to download the required software:</p>
+            
+            <div class="download-grid">
+                <div class="download-card">
+                    <i class="fab fa-java"></i>
+                    <h4>Java Development Kit</h4>
+                    <p>JDK 8 or higher required for compiling and running the application</p>
+                    <a href="https://www.oracle.com/java/technologies/javase-downloads.html" class="btn">Download JDK</a>
+                </div>
+                
+                <div class="download-card">
+                    <i class="fas fa-database"></i>
+                    <h4>MySQL Server</h4>
+                    <p>MySQL 5.7 or higher for database management</p>
+                    <a href="https://dev.mysql.com/downloads/mysql/" class="btn">Download MySQL</a>
+                </div>
+                
+                <div class="download-card">
+                    <i class="fas fa-plug"></i>
+                    <h4>MySQL Connector/J</h4>
+                    <p>JDBC driver for Java-MySQL connectivity</p>
+                    <a href="https://dev.mysql.com/downloads/connector/j/" class="btn">Download Connector</a>
+                </div>
+                
+                <div class="download-card">
+                    <i class="fas fa-box"></i>
+                    <h4>RS2XML Library</h4>
+                    <p>DbUtils library for database operations</p>
+                    <a href="https://sourceforge.net/projects/finalangelsanddemons/files/RS2XML.jar/download" class="btn">Download RS2XML</a>
+                </div>
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>Note:</strong> Make sure to add the MySQL Connector/J and RS2XML JAR files to your classpath after downloading.
+            </div>
+        </section>
+        
+        <section id="setup">
+            <h2>Setup Instructions</h2>
+            
+            <h3>Prerequisites</h3>
+            <ul>
+                <li>Java Development Kit (JDK) 8 or higher</li>
+                <li>MySQL Server 5.7 or higher</li>
+                <li>MySQL Connector/J</li>
+                <li>RS2XML (DbUtils) library</li>
+            </ul>
+            
+            <h3>Installation Steps</h3>
+            <div class="step-container">
+                <div class="step">
+                    <div class="step-content">
+                        <h4>Install Java</h4>
+                        <p>Download and install the latest JDK from the official Oracle website. Set the JAVA_HOME environment variable.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-content">
+                        <h4>Install MySQL</h4>
+                        <p>Download and install MySQL Server. Remember the root password you set during installation.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-content">
+                        <h4>Download Libraries</h4>
+                        <p>Download MySQL Connector/J and RS2XML libraries. Add these JAR files to your project's classpath.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-content">
+                        <h4>Database Setup</h4>
+                        <p>Create a new database named 'library' and execute the SQL script provided with the application to create the necessary tables.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-content">
+                        <h4>Configure Connection</h4>
+                        <p>Update the database connection settings in the application to match your MySQL installation (host, port, username, password).</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-content">
+                        <h4>Run Application</h4>
+                        <p>Compile and run the Java application. The main class is typically named LibraryManagementSystem.java or similar.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="screenshot">
+                <img src="images/database-setup.png" alt="Database Setup Example">
+                <p class="caption">Figure 4: Database Setup Example</p>
+            </div>
+        </section>
+        
+        <section id="database">
+            <h2>Database Schema</h2>
+            
+            <p>The application uses a MySQL database with the following tables:</p>
+            
+            <h3>Books Table</h3>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>book_id</td>
+                    <td>INT (Primary Key)</td>
+                    <td>Unique identifier for each book</td>
+                </tr>
+                <tr>
+                    <td>title</td>
+                    <td>VARCHAR(255)</td>
+                    <td>Title of the book</td>
+                </tr>
+                <tr>
+                    <td>author</td>
+                    <td>VARCHAR(255)</td>
+                    <td>Author of the book</td>
+                </tr>
+                <tr>
+                    <td>available</td>
+                    <td>BOOLEAN</td>
+                    <td>Availability status (true if available)</td>
+                </tr>
+            </table>
+            
+            <h3>Users Table</h3>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>user_id</td>
+                    <td>INT (Primary Key)</td>
+                    <td>Unique identifier for each user</td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>VARCHAR(255)</td>
+                    <td>Full name of the user</td>
+                </tr>
+                <tr>
+                    <td>email</td>
+                    <td>VARCHAR(255)</td>
+                    <td>Email address of the user</td>
+                </tr>
+            </table>
+            
+            <h3>Transactions Table</h3>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>transaction_id</td>
+                    <td>INT (Primary Key)</td>
+                    <td>Unique identifier for each transaction</td>
+                </tr>
+                <tr>
+                    <td>book_id</td>
+                    <td>INT (Foreign Key)</td>
+                    <td>Reference to the borrowed book</td>
+                </tr>
+                <tr>
+                    <td>user_id</td>
+                    <td>INT (Foreign Key)</td>
+                    <td>Reference to the user who borrowed the book</td>
+                </tr>
+                <tr>
+                    <td>issue_date</td>
+                    <td>DATE</td>
+                    <td>Date when the book was issued</td>
+                </tr>
+                <tr>
+                    <td>due_date</td>
+                    <td>DATE</td>
+                    <td>Date when the book is due to be returned</td>
+                </tr>
+                <tr>
+                    <td>return_date</td>
+                    <td>DATE</td>
+                    <td>Date when the book was returned (NULL if not returned)</td>
+                </tr>
+                <tr>
+                    <td>fine_amount</td>
+                    <td>DECIMAL(10,2)</td>
+                    <td>Fine amount if returned after due date</td>
+                </tr>
+            </table>
+            
+            <div class="screenshot">
+                <img src="images/database-schema.png" alt="Database Schema Diagram">
+                <p class="caption">Figure 5: Database Schema Diagram</p>
+            </div>
+        </section>
+        
+        <section id="usage">
+            <h2>Usage Guide</h2>
+            
+            <h3>Adding Books</h3>
+            <p>To add a new book to the library:</p>
+            <ol>
+                <li>Navigate to the 'Books' section</li>
+                <li>Click the 'Add New Book' button</li>
+                <li>Fill in the book details (title, author)</li>
+                <li>Click 'Save' to add the book to the database</li>
+            </ol>
+            
+            <div class="screenshot">
+                <img src="images/add-book.png" alt="Add Book Interface">
+                <p class="caption">Figure 6: Add Book Interface</p>
+            </div>
+            
+            <h3>Managing Users</h3>
+            <p>To add a new library user:</p>
+            <ol>
+                <li>Navigate to the 'Users' section</li>
+                <li>Click the 'Add New User' button</li>
+                <li>Enter the user's name and email address</li>
+                <li>Click 'Save' to add the user to the database</li>
+            </ol>
+            
+            <div class="screenshot">
+                <img src="images/add-user.png" alt="Add User Interface">
+                <p class="caption">Figure 7: Add User Interface</p>
+            </div>
+            
+            <h3>Issuing Books</h3>
+            <p>To issue a book to a user:</p>
+            <ol>
+                <li>Navigate to the 'Transactions' section</li>
+                <li>Click the 'Issue Book' button</li>
+                <li>Select a user from the dropdown list</li>
+                <li>Select an available book</li>
+                <li>Click 'Issue' to complete the transaction</li>
+            </ol>
+            
+            <div class="screenshot">
+                <img src="images/issue-book.png" alt="Issue Book Interface">
+                <p class="caption">Figure 8: Issue Book Interface</p>
+            </div>
+            
+            <h3>Returning Books</h3>
+            <p>To return a borrowed book:</p>
+            <ol>
+                <li>Navigate to the 'Transactions' section</li>
+                <li>Click the 'Return Book' button</li>
+                <li>Select the transaction from the list of active loans</li>
+                <li>The system will calculate any applicable fines</li>
+                <li>Click 'Return' to complete the process</li>
+            </ol>
+            
+            <div class="screenshot">
+                <img src="images/return-book.png" alt="Return Book Interface">
+                <p class="caption">Figure 9: Return Book Interface</p>
+            </div>
+            
+            <h3>Generating Reports</h3>
+            <p>To generate reports:</p>
+            <ol>
+                <li>Navigate to the 'Reports' section</li>
+                <li>Select the type of report you want to generate</li>
+                <li>Set any filters or date ranges if needed</li>
+                <li>Click 'Generate Report'</li>
+                <li>Use the 'Export' button to save the report as CSV</li>
+            </ol>
+            
+            <div class="screenshot">
+                <img src="images/reports.png" alt="Reports Interface">
+                <p class="caption">Figure 10: Reports Interface</p>
+            </div>
+        </section>
+        
+        <section id="output">
+            <h2>Expected Output Examples</h2>
+            
+            <h3>Sample Book List</h3>
+            <div class="output-example">
+                <div class="output-header">Book Management Output</div>
+                <div class="output-content">
+Book ID | Title                     | Author          | Status
+--------|---------------------------|-----------------|----------
+101     | To Kill a Mockingbird     | Harper Lee      | Available
+102     | 1984                      | George Orwell   | Checked Out
+103     | The Great Gatsby          | F. Scott Fitzgerald | Available
+                </div>
+            </div>
+            
+            <h3>Sample User List</h3>
+            <div class="output-example">
+                <div class="output-header">User Management Output</div>
+                <div class="output-content">
+User ID | Name              | Email
+--------|-------------------|---------------------------
+201     | John Smith        | john.smith@example.com
+202     | Emma Johnson      | emma.johnson@example.com
+203     | Michael Brown     | michael.brown@example.com
+                </div>
+            </div>
+            
+            <h3>Sample Transaction Report</h3>
+            <div class="output-example">
+                <div class="output-header">Transaction Report Output</div>
+                <div class="output-content">
+Transaction ID | Book Title           | User Name     | Issue Date  | Due Date   | Return Date | Fine
+---------------|----------------------|---------------|-------------|------------|-------------|------
+301           | 1984                 | John Smith    | 2023-05-01  | 2023-05-08 | 2023-05-10  | $2.00
+302           | The Great Gatsby     | Emma Johnson  | 2023-05-03  | 2023-05-10 | NULL        | $0.00
+                </div>
+            </div>
+            
+            <div class="screenshot">
+                <img src="C:\Madhu\Real_PROJECTS\Library\New folder\main-dashboard.png.png" alt="Sample Application Output">
+                <p class="caption">Figure 11: Sample Application Output</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Library Management System Documentation</p>
+            <p></p>
+        </div>
+    </footer>
+</body>
+</html>
