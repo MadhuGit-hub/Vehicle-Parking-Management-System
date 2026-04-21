@@ -159,7 +159,7 @@ http://localhost:3000
 
 ## 👨💻 Author
 
-Your Name
+CHERUKURI MADHU
 
 ---
 
