@@ -16,7 +16,7 @@ In many places such as malls, offices, hospitals, and educational institutions, 
 * Manual record-keeping errors
 * No proper vehicle tracking
 * Inaccurate billing
-* Poor security
+
 
 Therefore, an automated system is required to manage parking efficiently.
 
